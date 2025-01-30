@@ -70,6 +70,53 @@ public class Veronica {
                 }
                 taskCount--;
             }
+            else if (userInput.startsWith("todo ")) {
+                String taskDescription = userInput.substring(5);
+
+                tasks[taskCount++] = new ToDo(taskDescription);
+
+                System.out.println("____________________________________________________________");
+                System.out.println("Veronica: Alright, I've added this to the list.");
+                System.out.println(tasks[taskCount - 1]);
+                System.out.println("Now, you've got " + taskCount + " tasks in the list!");
+                System.out.println("____________________________________________________________");
+
+            }
+            else if (userInput.startsWith("deadline ")) {
+                String[] parts = userInput.substring(9).split(" /by ");
+
+                if (parts.length == 2) {
+                    tasks[taskCount++] = new Deadline(parts[0], parts[1]);
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Veronica: Alright, I've added this to the list.");
+                    System.out.println(tasks[taskCount - 1]);
+                    System.out.println("Now, you've got " + taskCount + " tasks in the list!");
+                    System.out.println("____________________________________________________________");
+                }
+                else {
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Veronica: Invalid format. Use: deadline <task> /by <date>");
+                    System.out.println("____________________________________________________________");
+                }
+            }
+            else if (userInput.startsWith("event ")) {
+
+                String[] parts = userInput.substring(6).split(" /from | /to ");
+
+                if (parts.length == 3) {
+                    tasks[taskCount++] = new Event(parts[0], parts[1], parts[2]);
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Veronica: Alright, I've added this to the list.");
+                    System.out.println(tasks[taskCount - 1]);
+                    System.out.println("Now, you've got " + taskCount + " tasks in the list!");
+                    System.out.println("____________________________________________________________");
+                }
+                else {
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Veronica: Invalid format. Use: event <task> /from <start> /to <end>");
+                    System.out.println("____________________________________________________________");
+                }
+            }
             else {
                 if (taskCount < 100) {
                     tasks[taskCount++] = new Task(userInput);
