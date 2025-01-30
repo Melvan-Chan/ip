@@ -2,11 +2,13 @@ import java.util.Scanner;
 
 public class Veronica {
     public static void main(String[] args) {
-        String greet = "____________________________________________________________\n"
-                + " Hello! I'm Veronica. Tony Stark create me after Jarvis.\n"
-                + " A little bit about me is that my name means 'she who brings the victory'.\n"
-                + " What can I do for you?\n"
-                + "____________________________________________________________\n";
+        String greet = """
+                ____________________________________________________________
+                 Hello! I'm Veronica. Tony Stark create me after Jarvis.
+                 A little bit about me is that my name means 'she who brings the victory'.
+                 What can I do for you?
+                ____________________________________________________________
+                """;
         System.out.println(greet);
 
         Scanner sc = new Scanner(System.in); // Set up to read user input
