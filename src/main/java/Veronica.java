@@ -38,8 +38,12 @@ public class Veronica {
                     break;
                 } else if (userInput.equalsIgnoreCase("list")) {
                     System.out.println("     _________________________________________________________________________________________________");
-                    for (int i = 0; i < taskCount; ++i) {
-                        System.out.println("     " + (i + 1) + ". " + (tasks[i]));
+                    if (taskCount == 0) {
+                        System.out.println("     Veronica: List is empty at the moment.");
+                    } else {
+                        for (int i = 0; i < taskCount; ++i) {
+                            System.out.println("     " + (i + 1) + ". " + (tasks[i]));
+                        }
                     }
                     System.out.println("     _________________________________________________________________________________________________");
                 } else if (userInput.startsWith("mark ")) {
@@ -88,7 +92,7 @@ public class Veronica {
                             System.out.println("     _________________________________________________________________________________________________");
 
                         } else {
-                            throw new VeronicaException("OOPS!!! Task number does not exist.");
+                            throw new VeronicaException("UHOH! Task number does not exist.");
                         }
                     } catch (NumberFormatException e) {
                         throw new VeronicaException("UHOH! Please enter a valid number after 'remove'.");
