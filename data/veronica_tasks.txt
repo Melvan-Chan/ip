@@ -1,0 +1,3 @@
+[T] | [X] | read book
+[T] | [ ] | delete book
+[E] | [X] | book club | [from: [from: [from: Friday | to: to: to: Sunday]]]

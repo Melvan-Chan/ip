@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected TaskType type;
@@ -26,6 +26,8 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + type.name().charAt(0) + "][" + this.getStatus() + "] " + this.description;
+        return "[" + type.name().charAt(0) + "] | [" + this.getStatus() + "] | " + this.description;
     }
+
+    public abstract String toFileString();
 }

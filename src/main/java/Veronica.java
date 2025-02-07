@@ -1,12 +1,26 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Veronica {
+    private static final String FILE_PATH = "data/veronica_tasks.txt";
+    private static final Storage storage = new Storage(FILE_PATH);
+    static Task[] tasks = new Task[100];           // Task object to store user tasks
+    static int taskCount = 0;                      // Track number of tasks added
+
+
     public static void main(String[] args) {
+        tasks = storage.loadTasks();    // Should load an array into tasks
+        taskCount = storage.getTaskCount();
+        greetUser();
+        processUserCommands();
+    }
+
+    private static void greetUser() {
         String greet = """
                 _________________________________________________________________________________________________
                  Hello! I'm Veronica. Tony Stark create me after Jarvis.
                  A little bit about me is that my name means 'she who brings the victory'.
-                 
+                
                  Here's my command list:
                  - todo <task>: Add's task to the list.
                  - deadline <task> /by <date>: Add's deadline to the list with a due date.
@@ -15,15 +29,14 @@ public class Veronica {
                  - mark <no. of task>: Marks the task specified.
                  - unmark <no. of task>: Unmarks the task specified.
                  - remove <no. of task>: Removes the task specified.
-                 
+                
                  What can I do for you?
                 _________________________________________________________________________________________________
                 """;
         System.out.println(greet);
-
+    }
+    private static void processUserCommands() {
         Scanner sc = new Scanner(System.in);    // Set up to read user input
-        Task[] tasks = new Task[100];           // Task object to store user tasks
-        int taskCount = 0;                      // Track number of tasks added
 
         while (true) {
             String userInput = "";
@@ -35,6 +48,7 @@ public class Veronica {
             try {
                 if (userInput.equalsIgnoreCase("bye")) {
                     System.out.println("Veronica: Bye. Hope to see you again soon! ");
+                    storage.saveTasks(tasks, taskCount);
                     break;
                 } else if (userInput.equalsIgnoreCase("list")) {
                     System.out.println("     _________________________________________________________________________________________________");
@@ -148,5 +162,37 @@ public class Veronica {
             }
         }
         sc.close();
+    }
+
+    private static void listTasks() {
+
+    }
+
+    private static void markTask(String input) throws VeronicaException {
+
+    }
+
+    private static void unmarkTask(String input) throws VeronicaException {
+
+    }
+
+    private static void removeTask(String input) throws VeronicaException {
+
+    }
+
+    private static void addTodo(String input) throws VeronicaException {
+
+    }
+
+    private static void addDeadline(String input) throws VeronicaException {
+
+    }
+
+    private static void addEvent(String input) throws VeronicaException {
+
+    }
+
+    private static void saveTasksToFile() {
+
     }
 }
