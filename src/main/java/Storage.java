@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Storage {
     private final String filePath;
@@ -77,20 +78,47 @@ public class Storage {
         switch (type) {
             case "[T]":
                 ToDo todo = new ToDo(description);
-                if (isDone) todo.markAsComplete();
+                if (isDone) {
+                    todo.markAsComplete();
+                }
                 return todo;
 
             case "[D]":
                 if (parts.length < 4) return null; // Ensure deadline has date
-                Deadline deadline = new Deadline(description, parts[3]);
-                if (isDone) deadline.markAsComplete();
-                return deadline;
+                try {
+                    String cleanDate = parts[3].replace("[by: ", "").replace("]", "").trim(); // Remove unwanted characters
+                    LocalDateTime dateTime = LocalDateTime.parse(cleanDate);
+                    DateTimeFormatter correctFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                    String formattedDate = dateTime.format(correctFormat); // Convert to correct format
+                    Deadline deadline = new Deadline(description, formattedDate);
+                    if (isDone) {
+                        deadline.markAsComplete();
+                    }
+                    return deadline;
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid date format in saved data: " + parts[3]);
+                    return null;
+                }
 
             case "[E]":
                 if (parts.length < 5) return null; // Ensure event has start & end time
-                Event event = new Event(description, parts[3], parts[4]);
-                if (isDone) event.markAsComplete();
-                return event;
+                try {
+                    String cleanFrom = parts[3].replace("[from: ", ""); // Remove unwanted characters
+                    String cleanTo = parts[4].replace("to: ", "").replace("]", "").trim();
+                    LocalDateTime fromDateTime = LocalDateTime.parse(cleanFrom);
+                    LocalDateTime toDateTime = LocalDateTime.parse(cleanTo);
+                    DateTimeFormatter correctFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+                    String formattedFrom = fromDateTime.format(correctFormat);
+                    String formattedTo = toDateTime.format(correctFormat);
+                    Event event = new Event(description, formattedFrom, formattedTo);
+                    if (isDone) {
+                        event.markAsComplete();
+                    }
+                    return event;
+                } catch (DateTimeParseException e) {
+                    System.out.println("Invalid event date format in saved data: " + parts[3] + " to " + parts[4]);
+                    return null;
+                }
 
             default:
                 System.out.println("Unknown task type: " + type);

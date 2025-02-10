@@ -25,7 +25,8 @@ public class Veronica {
                  Here's my command list:
                  - todo <task>: Add's task to the list.
                  - deadline <task> /by <date>: Add's deadline to the list with a due date.
-                 - event <task> /from <start> /to <end>: Add's event to the list with a start/end date..'
+                 - event <task> /from <date> /to <date>: Add's event to the list with a start/end date.'
+                    > Each date's format must be dd/MM/yyyy (Time) e.g 2/12/2019 1800
                  - list: List's all the tasks in the list.
                  - mark <no. of task>: Marks the task specified.
                  - unmark <no. of task>: Unmarks the task specified.

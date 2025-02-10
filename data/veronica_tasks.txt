@@ -1,2 +1,5 @@
-[T] | [ ] | read book
 [D] | [ ] | return book | [by: 2019-12-02T18:00]
+[E] | [ ] | book club | [from: 1991-12-15T18:00 | to: 1991-12-15T19:00]
+[T] | [ ] | read book
+[D] | [ ] | submit assignment | [by: 2022-02-11T12:34]
+[E] | [ ] | school reopening | [from: 2023-02-11T23:59 | to: 2023-03-11T23:59]
