@@ -198,10 +198,6 @@ public class Veronica {
         }
     }
 
-    private static void saveTasksToFile() {
-
-    }
-
     private static void exitProgram() {
         storage.saveTasks(tasks, taskCount);
         System.out.println("Veronica: Bye. Hope to see you again soon! ");

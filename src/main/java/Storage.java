@@ -4,12 +4,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Storage {
     private final String filePath;
     private int taskCount = 0;
+    private static final int MAX_TASK_SIZE = 100;
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy, h:mma");
+
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -43,7 +47,7 @@ public class Storage {
 
     // Load tasks from file
     public Task[] loadTasks() {
-        Task[] tasks = new Task[100]; // Fixed array size
+        Task[] tasks = new Task[MAX_TASK_SIZE]; // Fixed array size
         taskCount = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(this.filePath))) {
             String line;
