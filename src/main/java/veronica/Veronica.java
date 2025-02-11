@@ -1,3 +1,8 @@
+package veronica;
+
+import ui.Parser;
+import ui.Ui;
+
 import java.util.Scanner;
 
 public class Veronica {
