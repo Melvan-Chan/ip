@@ -4,14 +4,14 @@ import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
-    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM yyyy, h:mma");
 
     public Deadline(String description, String by) {
         super(description, TaskType.DEADLINE);
         try {
-            this.by = LocalDateTime.parse(by, INPUT_FORMAT);
+            this.by = LocalDateTime.parse(by, Storage.INPUT_FORMAT);
+            this.dateAllowed = true;
         } catch (DateTimeParseException e) {
+            this.dateAllowed = false;
             System.out.println("     Invalid date format! Please use 'd/M/yyyy HHmm'. Example: 16/12/1991 1800");
             this.by = null;
         }
@@ -31,7 +31,7 @@ public class Deadline extends Task {
     private static String formatDateWithSuffix(LocalDateTime dateTime) {
         int day = dateTime.getDayOfMonth();
         String suffix = getDaySuffix(day);
-        return day + suffix + " of " + dateTime.format(OUTPUT_FORMAT);
+        return day + suffix + " of " + dateTime.format(Storage.OUTPUT_FORMAT);
     }
 
     private static String getDaySuffix(int day) {

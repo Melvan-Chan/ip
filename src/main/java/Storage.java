@@ -11,9 +11,8 @@ import java.time.format.DateTimeParseException;
 public class Storage {
     private final String filePath;
     private int taskCount = 0;
-    private static final int MAX_TASK_SIZE = 100;
-    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy, h:mma");
+    public static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    public static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy, h:mma");
 
 
     public Storage(String filePath) {
@@ -48,7 +47,7 @@ public class Storage {
 
     // Load tasks from file
     public Task[] loadTasks() {
-        Task[] tasks = new Task[MAX_TASK_SIZE]; // Fixed array size
+        Task[] tasks = new Task[Veronica.MAX_TASK_SIZE]; // Fixed array size
         taskCount = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(this.filePath))) {
             String line;
@@ -88,8 +87,7 @@ public class Storage {
                 try {
                     String cleanDate = parts[3].replace("[by: ", "").replace("]", "").trim(); // Remove unwanted characters
                     LocalDateTime dateTime = LocalDateTime.parse(cleanDate);
-                    DateTimeFormatter correctFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-                    String formattedDate = dateTime.format(correctFormat); // Convert to correct format
+                    String formattedDate = dateTime.format(INPUT_FORMAT); // Convert to correct format
                     Deadline deadline = new Deadline(description, formattedDate);
                     if (isDone) {
                         deadline.markAsComplete();
@@ -107,9 +105,8 @@ public class Storage {
                     String cleanTo = parts[4].replace("to: ", "").replace("]", "").trim();
                     LocalDateTime fromDateTime = LocalDateTime.parse(cleanFrom);
                     LocalDateTime toDateTime = LocalDateTime.parse(cleanTo);
-                    DateTimeFormatter correctFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-                    String formattedFrom = fromDateTime.format(correctFormat);
-                    String formattedTo = toDateTime.format(correctFormat);
+                    String formattedFrom = fromDateTime.format(INPUT_FORMAT);
+                    String formattedTo = toDateTime.format(INPUT_FORMAT);
                     Event event = new Event(description, formattedFrom, formattedTo);
                     if (isDone) {
                         event.markAsComplete();
