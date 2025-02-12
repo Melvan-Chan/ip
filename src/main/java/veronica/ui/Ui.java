@@ -7,7 +7,7 @@ public class Ui {
     public static void showGreetMessage() {
         String greet = """
                 _________________________________________________________________________________________________
-                 Hello! I'm veronica.Veronica. Tony Stark create me after Jarvis.
+                 Hello! I'm Veronica. Tony Stark create me after Jarvis.
                  A little bit about me is that my name means 'she who brings the victory'.
                 
                  Here's my command list:
@@ -27,7 +27,7 @@ public class Ui {
     }
 
     public static void showGoodbyeMessage() {
-        System.out.println("veronica.Veronica: Bye. Hope to see you again soon!");
+        System.out.println("Veronica: Bye. Hope to see you again soon!");
     }
 
     public static void showErrorMessage(String message) {
@@ -41,7 +41,7 @@ public class Ui {
     public static void showList(Task[] tasks, int taskCount) {
         System.out.println("     _________________________________________________________________________________________________");
         if (taskCount == 0) {
-            System.out.println("     veronica.Veronica: List is empty at the moment.");
+            System.out.println("     Veronica: List is empty at the moment.");
         } else {
             for (int i = 0; i < taskCount; ++i) {
                 System.out.println("     " + (i + 1) + ". " + (tasks[i]));
@@ -52,35 +52,35 @@ public class Ui {
 
     public static void showTaskAddedMessage(Task task, int taskCount) {
         System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     veronica.Veronica: Alright, I've added this to the list.");
+        System.out.println("     Veronica: Alright, I've added this to the list.");
         System.out.println("     " + task);
-        System.out.println("     veronica.Veronica: Now, you've got " + taskCount + " tasks in the list!");
+        System.out.println("     Veronica: Now, you've got " + taskCount + " tasks in the list!");
         System.out.println("     _________________________________________________________________________________________________");
     }
 
     public static void showTaskRemovedMessage(Task task, int taskCount) {
         System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     veronica.Veronica: Removed " + task);
-        System.out.println("     veronica.Veronica: Now, you've got " + taskCount + " tasks left.");
+        System.out.println("     Veronica: Removed " + task);
+        System.out.println("     Veronica: Now, you've got " + taskCount + " tasks left.");
         System.out.println("     _________________________________________________________________________________________________");
     }
 
     public static void showTaskRemovedAllMessage() {
         System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     veronica.Veronica: Removed all the tasks in this list.");
+        System.out.println("     Veronica: Removed all the tasks in this list.");
         System.out.println("     _________________________________________________________________________________________________");
     }
 
     public static void showTaskMarkedMessage(Task task) {
         System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     veronica.Veronica: Great job! Marking this task as completed!");
+        System.out.println("     Veronica: Great job! Marking this task as completed!");
         System.out.println("     " + task);
         System.out.println("     _________________________________________________________________________________________________");
     }
 
     public static void showTaskUnmarkedMessage(Task task) {
         System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     veronica.Veronica: Alright! Marking this task as uncompleted!");
+        System.out.println("     Veronica: Alright! Marking this task as uncompleted!");
         System.out.println("     " + task);
         System.out.println("     _________________________________________________________________________________________________");
     }

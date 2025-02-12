@@ -3,7 +3,6 @@ package veronica.ui;
 import veronica.task.TaskManager;
 import veronica.main.VeronicaException;
 
-
 public class Parser {
     private final TaskManager taskManager;
     private boolean isActive;
