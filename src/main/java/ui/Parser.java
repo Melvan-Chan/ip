@@ -1,3 +1,9 @@
+package ui;
+
+import task.TaskManager;
+import veronica.VeronicaException;
+
+
 public class Parser {
     private final TaskManager taskManager;
     private boolean isActive;

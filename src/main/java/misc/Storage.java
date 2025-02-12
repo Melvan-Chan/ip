@@ -1,3 +1,11 @@
+package misc;
+
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.ToDo;
+import veronica.Veronica;
+
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.File;
@@ -62,7 +70,7 @@ public class Storage {
         }
         return tasks;
     }
-    // Concert a line from file to a Task object
+    // Concert a line from file to a task.Task object
     private Task parseTask(String line) {
         String[] parts = line.split(" \\| "); // Split based on " | "
         if (parts.length < 3) {

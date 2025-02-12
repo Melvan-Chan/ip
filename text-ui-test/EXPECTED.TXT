@@ -1,21 +1,21 @@
 ____________________________________________________________
- Hello! I'm Veronica. Tony Stark create me after Jarvis.
+ Hello! I'm veronica.Veronica. Tony Stark create me after Jarvis.
  A little bit about me is that my name means 'she who brings the victory'.
  What can I do for you?
 ____________________________________________________________
 
 ____________________________________________________________
-Veronica: Alright, I've added this to the list.
+veronica.Veronica: Alright, I've added this to the list.
 [T][ ] add book
 Now, you've got 1 tasks in the list!
 ____________________________________________________________
 ____________________________________________________________
-Veronica: Alright, I've added this to the list.
+veronica.Veronica: Alright, I've added this to the list.
 [T][ ] return book
 Now, you've got 2 tasks in the list!
 ____________________________________________________________
 ____________________________________________________________
-Veronica: Alright, I've added this to the list.
+veronica.Veronica: Alright, I've added this to the list.
 [T][ ] buy book
 Now, you've got 3 tasks in the list!
 ____________________________________________________________
