@@ -1,8 +1,8 @@
-package task;
+package veronica.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import misc.Storage;
+import veronica.misc.Storage;
 
 public class Deadline extends Task {
     protected LocalDateTime by;
@@ -19,6 +19,10 @@ public class Deadline extends Task {
         }
     }
 
+    public LocalDateTime getDeadline() {
+        return this.by;
+    }
+
     @Override
     public String toString() {
         String formattedDate = (by != null) ? formatDateWithSuffix(by) : "Invalid date";
@@ -30,19 +34,4 @@ public class Deadline extends Task {
         return super.toString() + " | [by: " + by + "]";
     }
 
-    private static String formatDateWithSuffix(LocalDateTime dateTime) {
-        int day = dateTime.getDayOfMonth();
-        String suffix = getDaySuffix(day);
-        return day + suffix + " of " + dateTime.format(Storage.OUTPUT_FORMAT);
-    }
-
-    private static String getDaySuffix(int day) {
-        if (day >= 11 && day <= 13) return "th";
-        switch (day % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
-        }
-    }
 }

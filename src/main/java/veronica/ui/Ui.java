@@ -1,6 +1,6 @@
-package ui;
+package veronica.ui;
 
-import task.Task;
+import veronica.task.Task;
 
 public class Ui {
 

@@ -1,7 +1,7 @@
-package veronica;
+package veronica.main;
 
-import ui.Parser;
-import ui.Ui;
+import veronica.ui.Parser;
+import veronica.ui.Ui;
 
 import java.util.Scanner;
 

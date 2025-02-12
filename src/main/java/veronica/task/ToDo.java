@@ -1,4 +1,4 @@
-package task;
+package veronica.task;
 
 public class ToDo extends Task {
 

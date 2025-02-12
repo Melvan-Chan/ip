@@ -1,10 +1,10 @@
-package misc;
+package veronica.misc;
 
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.ToDo;
-import veronica.Veronica;
+import veronica.task.Deadline;
+import veronica.task.Event;
+import veronica.task.Task;
+import veronica.task.ToDo;
+import veronica.main.Veronica;
 
 import java.io.BufferedWriter;
 import java.io.BufferedReader;

@@ -1,9 +1,9 @@
-package task;
+package veronica.task;
 
-import misc.Storage;
-import ui.Ui;
-import veronica.Veronica;
-import veronica.VeronicaException;
+import veronica.misc.Storage;
+import veronica.ui.Ui;
+import veronica.main.Veronica;
+import veronica.main.VeronicaException;
 
 public class TaskManager {
     private Task[] tasks;

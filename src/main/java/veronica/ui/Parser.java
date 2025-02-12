@@ -1,7 +1,7 @@
-package ui;
+package veronica.ui;
 
-import task.TaskManager;
-import veronica.VeronicaException;
+import veronica.task.TaskManager;
+import veronica.main.VeronicaException;
 
 
 public class Parser {

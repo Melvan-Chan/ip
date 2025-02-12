@@ -1,4 +1,8 @@
-package task;
+package veronica.task;
+
+import veronica.misc.Storage;
+
+import java.time.LocalDateTime;
 
 public abstract class Task {
     protected String description;
@@ -29,6 +33,22 @@ public abstract class Task {
 
     public void markAsIncomplete() {
         this.isDone = false;
+    }
+
+    public static String formatDateWithSuffix(LocalDateTime dateTime) {
+        int day = dateTime.getDayOfMonth();
+        String suffix = getDaySuffix(day);
+        return day + suffix + " of " + dateTime.format(Storage.OUTPUT_FORMAT);
+    }
+
+    public static String getDaySuffix(int day) {
+        if (day >= 11 && day <= 13) return "th";
+        return switch (day % 10) {
+            case 1 -> "st";
+            case 2 -> "nd";
+            case 3 -> "rd";
+            default -> "th";
+        };
     }
 
     public String toString() {

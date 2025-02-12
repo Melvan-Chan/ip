@@ -1,8 +1,8 @@
-package task;
+package veronica.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-import misc.Storage;
+import veronica.misc.Storage;
 
 public class Event extends Task {
     protected LocalDateTime from;
@@ -34,19 +34,4 @@ public class Event extends Task {
         return super.toString() + " | [from: " + from + " | to: " + to + "]";
     }
 
-    private static String formatDateWithSuffix(LocalDateTime dateTime) {
-        int day = dateTime.getDayOfMonth();
-        String suffix = getDaySuffix(day);
-        return day + suffix + " of " + dateTime.format(Storage.OUTPUT_FORMAT);
-    }
-
-    private static String getDaySuffix(int day) {
-        if (day >= 11 && day <= 13) return "th";
-        switch (day % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
-        }
-    }
 }
