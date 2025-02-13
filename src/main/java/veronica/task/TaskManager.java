@@ -25,7 +25,7 @@ public class TaskManager {
             tasks[taskIndex].markAsComplete();
             Ui.showTaskMarkedMessage(tasks[taskIndex]);
         } else {
-            throw new VeronicaException("UHOH! task.Task number does not exist.");
+            throw new VeronicaException("UHOH! Task number does not exist.");
         }
     }
 
@@ -35,7 +35,7 @@ public class TaskManager {
             tasks[taskIndex].markAsIncomplete();
             Ui.showTaskUnmarkedMessage(tasks[taskIndex]);
         } else {
-            throw new VeronicaException("UHOH! task.Task number does not exist.");
+            throw new VeronicaException("UHOH! Task number does not exist.");
         }
     }
 
@@ -59,7 +59,7 @@ public class TaskManager {
 
                 Ui.showTaskRemovedMessage(removedTask, taskCount);
             } else {
-                throw new VeronicaException("UHOH! task.Task number does not exist.");
+                throw new VeronicaException("UHOH! Task number does not exist.");
             }
         }
     }
