@@ -18,26 +18,40 @@ public class Parser {
 
     public void processUserCommands(String userInput) {
         try {
-            if (userInput.equalsIgnoreCase("bye")) {
+
+            String[] parts = userInput.split(" ",2);
+            String command = parts[0].toLowerCase();
+
+            switch (command) {
+            case "bye" -> {
                 Ui.showGoodbyeMessage();
                 this.isActive = false;
                 taskManager.exitProgram();
-            } else if (userInput.equalsIgnoreCase("list")) {
+            }
+            case "list" -> {
                 taskManager.listTasks();
-            } else if (userInput.startsWith("mark ")) {
+            }
+            case "mark" -> {
                 taskManager.markTask(userInput);
-            } else if (userInput.startsWith("unmark ")) {
+            }
+            case "unmark" -> {
                 taskManager.unmarkTask(userInput);
-            } else if (userInput.startsWith("remove ")) {
+            }
+            case "remove" -> {
                 taskManager.removeTask(userInput);
-            } else if (userInput.startsWith("todo ")) {
+            }
+            case "todo" -> {
                 taskManager.addTodo(userInput);
-            } else if (userInput.startsWith("deadline ")) {
+            }
+            case "deadline" -> {
                 taskManager.addDeadline(userInput);
-            } else if (userInput.startsWith("event ")) {
+            }
+            case "event" -> {
                 taskManager.addEvent(userInput);
-            } else {
+            }
+            default -> {
                 throw new VeronicaException("UHOH! I'm sorry, but I've no idea what you mean! Please try again.");
+            }
             }
         } catch (VeronicaException e) {
             Ui.showErrorMessage(e.getMessage());
