@@ -16,13 +16,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Handles loading and saving of tasks to a file for persistence.
+ */
 public class Storage {
     private final String filePath;
     private int taskCount = 0;
     public static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     public static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy, h:mma");
 
-
+    /**
+     * Constructs a Storage instance with the specified file path.
+     * If the file does not exist, it creates a new file.
+     *
+     * @param filePath The file path where tasks are stored.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
 
@@ -37,11 +45,21 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the number of tasks currently stored.
+     *
+     * @return The count of tasks.
+     */
     public int getTaskCount() {
         return this.taskCount;
     }
 
-    // Save tasks to file
+    /**
+     * Saves the given tasks to a file.
+     *
+     * @param tasks     The array of tasks to be saved.
+     * @param taskCount The number of tasks to be saved.
+     */
     public void saveTasks(Task[] tasks, int taskCount) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(this.filePath))) {
             for (int i = 0; i < taskCount; i++) {
@@ -53,7 +71,11 @@ public class Storage {
         }
     }
 
-    // Load tasks from file
+    /**
+     * Loads tasks from a file and returns them as an array.
+     *
+     * @return An array of tasks loaded from the file.
+     */
     public Task[] loadTasks() {
         Task[] tasks = new Task[Veronica.MAX_TASK_SIZE]; // Fixed array size
         taskCount = 0;
@@ -70,7 +92,13 @@ public class Storage {
         }
         return tasks;
     }
-    // Concert a line from file to a task.Task object
+
+    /**
+     * Parses a line from the file and converts it into a Task object.
+     *
+     * @param line The line representing a task.
+     * @return The corresponding Task object, or null if the format is invalid.
+     */
     private Task parseTask(String line) {
         String[] parts = line.split(" \\| "); // Split based on " | "
         if (parts.length < 3) {

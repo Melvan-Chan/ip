@@ -2,8 +2,14 @@ package veronica.ui;
 
 import veronica.task.Task;
 
+    /**
+     * Handles user interface interactions and displays messages for Veronica.
+     */
 public class Ui {
 
+    /**
+     * Displays a greeting message with available commands.
+     */
     public static void showGreetMessage() {
         String greet = """
                 _________________________________________________________________________________________________
@@ -26,18 +32,28 @@ public class Ui {
         System.out.println(greet);
     }
 
+    /**
+     * Displays a goodbye message when the user exits.
+     */
     public static void showGoodbyeMessage() {
         System.out.println("Veronica: Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Displays an error message.
+     *
+     * @param message The error message to be displayed.
+     */
     public static void showErrorMessage(String message) {
         System.out.println("    UHOH! Error: " + message);
     }
 
-    public static void showMessage(String message) {
-        System.out.println(message);
-    }
-
+        /**
+         * Displays the list of tasks.
+         *
+         * @param tasks The array of tasks.
+         * @param taskCount The number of tasks in the list.
+         */
     public static void showList(Task[] tasks, int taskCount) {
         System.out.println("     _________________________________________________________________________________________________");
         if (taskCount == 0) {
@@ -50,6 +66,12 @@ public class Ui {
         System.out.println("     _________________________________________________________________________________________________");
     }
 
+        /**
+         * Displays a message when a task is added.
+         *
+         * @param task The task that was added.
+         * @param taskCount The total number of tasks after adding.
+         */
     public static void showTaskAddedMessage(Task task, int taskCount) {
         System.out.println("     _________________________________________________________________________________________________");
         System.out.println("     Veronica: Alright, I've added this to the list.");
@@ -58,6 +80,12 @@ public class Ui {
         System.out.println("     _________________________________________________________________________________________________");
     }
 
+        /**
+         * Displays a message when a task is removed.
+         *
+         * @param task      The task that was removed.
+         * @param taskCount The total number of tasks remaining.
+         */
     public static void showTaskRemovedMessage(Task task, int taskCount) {
         System.out.println("     _________________________________________________________________________________________________");
         System.out.println("     Veronica: Removed " + task);
@@ -65,12 +93,20 @@ public class Ui {
         System.out.println("     _________________________________________________________________________________________________");
     }
 
+        /**
+         * Displays a message when all tasks are removed.
+         */
     public static void showTaskRemovedAllMessage() {
         System.out.println("     _________________________________________________________________________________________________");
         System.out.println("     Veronica: Removed all the tasks in this list.");
         System.out.println("     _________________________________________________________________________________________________");
     }
 
+        /**
+         * Displays a message when a task is marked as completed.
+         *
+         * @param task The task that was marked as completed.
+         */
     public static void showTaskMarkedMessage(Task task) {
         System.out.println("     _________________________________________________________________________________________________");
         System.out.println("     Veronica: Great job! Marking this task as completed!");
@@ -78,6 +114,11 @@ public class Ui {
         System.out.println("     _________________________________________________________________________________________________");
     }
 
+        /**
+         * Displays a message when a task is unmarked as incomplete.
+         *
+         * @param task The task that was unmarked.
+         */
     public static void showTaskUnmarkedMessage(Task task) {
         System.out.println("     _________________________________________________________________________________________________");
         System.out.println("     Veronica: Alright! Marking this task as uncompleted!");
