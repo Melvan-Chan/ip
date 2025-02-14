@@ -2,6 +2,8 @@ package veronica.ui;
 
 import veronica.task.Task;
 
+import java.util.List;
+
 public class Ui {
 
     public static void showGreetMessage() {
@@ -85,4 +87,18 @@ public class Ui {
         System.out.println("     _________________________________________________________________________________________________");
     }
 
+    public static void showNoMatchingTask(String message) {
+        System.out.println("     _________________________________________________________________________________________________");
+        System.out.println("     Veronica: No such task found with the given keyword: '" + message + "'");
+        System.out.println("     _________________________________________________________________________________________________");
+    }
+
+    public static void showMatchingTask(List<Task> matchingTasks, String message) {
+        System.out.println("     _________________________________________________________________________________________________");
+        System.out.println("     Veronica: Showing all task with the keyword: '" + message + "'");
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            System.out.println("     " + (i + 1) + ". " + matchingTasks.get(i));
+        }
+        System.out.println("     _________________________________________________________________________________________________");
+    }
 }
