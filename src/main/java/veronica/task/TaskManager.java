@@ -5,20 +5,40 @@ import veronica.ui.Ui;
 import veronica.main.Veronica;
 import veronica.main.VeronicaException;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ * Manages the list of tasks, including adding, removing, and marking tasks.
+ */
+
 public class TaskManager {
     private Task[] tasks;
     private int taskCount;
     private static final Storage storage = new Storage(Veronica.FILE_PATH);
 
+    /**
+     * Constructs a TaskManager and loads tasks from storage.
+     */
     public TaskManager() {
         tasks = storage.loadTasks();
         this.taskCount = storage.getTaskCount();
     }
 
+    /**
+     * Lists all tasks currently in the task manager.
+     */
     public void listTasks() {
         Ui.showList(tasks, taskCount);
     }
 
+    /**
+     * Marks a task as completed.
+     *
+     * @param input The user input containing the task number.
+     * @throws VeronicaException If the task number is invalid.
+     */
     public void markTask(String input) throws VeronicaException {
         int taskIndex = Integer.parseInt(input.substring(5)) - 1;
         if (taskIndex >= 0 && taskIndex < taskCount) {
@@ -29,6 +49,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Marks a task as incomplete.
+     *
+     * @param input The user input containing the task number.
+     * @throws VeronicaException If the task number is invalid.
+     */
     public void unmarkTask(String input) throws VeronicaException {
         int taskIndex = Integer.parseInt(input.substring(7)) - 1;
         if (taskIndex >= 0 && taskIndex < taskCount) {
@@ -39,6 +65,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Removes a task or clears all tasks.
+     *
+     * @param input The user input specifying which task to remove.
+     * @throws VeronicaException If the task number is invalid.
+     */
     public void removeTask(String input) throws VeronicaException {
         String argument = input.substring(7).trim();
         if (argument.equalsIgnoreCase("all")) {
@@ -64,6 +96,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Adds a new To-Do task to the list.
+     *
+     * @param input The user input containing the task description.
+     * @throws VeronicaException If the description is empty.
+     */
     public void addTodo(String input) throws VeronicaException {
         String taskDescription = input.substring(5).trim();
         if (taskDescription.isEmpty()) {
@@ -73,6 +111,12 @@ public class TaskManager {
         Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
     }
 
+    /**
+     * Adds a new Deadline task to the list.
+     *
+     * @param input The user input containing the task description and due date.
+     * @throws VeronicaException If the format is incorrect or missing required details.
+     */
     public void addDeadline(String input) throws VeronicaException {
         String[] parts = input.substring(9).split(" /by ");
         if (parts.length == 2) {
@@ -87,6 +131,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Adds a new Event task to the list.
+     *
+     * @param input The user input containing the event description, start date, and end date.
+     * @throws VeronicaException If the format is incorrect or missing required details.
+     */
     public void addEvent(String input) throws VeronicaException {
         String[] parts = input.substring(6).split(" /from | /to ");
         if (parts.length == 3) {
@@ -101,6 +151,29 @@ public class TaskManager {
         }
     }
 
+    public void findTasks(String input) throws VeronicaException {
+        String taskKeyword = input.substring(5).trim();
+        if (taskKeyword.isEmpty()) {
+            throw new VeronicaException("UHOH! Keyword description can't be empty.");
+        }
+
+        List<Task> matchingTasks = new ArrayList<Task>();
+        for (int i = 0; i < taskCount; i++) {
+            if(tasks[i].getDescription().toLowerCase().contains(taskKeyword.toLowerCase())) {
+                matchingTasks.add(tasks[i]);
+            }
+        }
+
+        if (matchingTasks.isEmpty()) {
+            Ui.showNoMatchingTask(taskKeyword);
+        } else {
+            Ui.showMatchingTask(matchingTasks, taskKeyword);
+        }
+    }
+
+    /**
+     * Saves the current tasks to storage and exits the program.
+     */
     public void exitProgram() {
         storage.saveTasks(tasks, taskCount);
     }
