@@ -122,7 +122,7 @@ public class TaskManager {
         if (parts.length == 2) {
             Deadline currTask = new Deadline(parts[0], parts[1]);
 
-            if (currTask.getDateAllowed()) {
+            if (currTask.isDateAllowed()) {
                 tasks[taskCount++] = currTask;
                 Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
             }
@@ -142,7 +142,7 @@ public class TaskManager {
         if (parts.length == 3) {
             Event currTask = new Event(parts[0], parts[1], parts[2]);
 
-            if (currTask.getDateAllowed()) {
+            if (currTask.isDateAllowed()) {
                 tasks[taskCount++] = currTask;
                 Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
             }

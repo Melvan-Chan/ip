@@ -8,13 +8,13 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected TaskType type;
-    protected boolean dateAllowed;
+    protected boolean isDateAllowed;
 
     public Task(String description, TaskType type) {
         this.description = description;
         this.isDone = false;
         this.type = type;
-        this.dateAllowed = false;
+        this.isDateAllowed = false;
     }
 
     public String getStatus() {
@@ -25,7 +25,7 @@ public abstract class Task {
         return this.description;
     }
 
-    public boolean getDateAllowed() { return this.dateAllowed; }
+    public boolean isDateAllowed() { return this.isDateAllowed; }
 
     public void markAsComplete() {
         this.isDone = true;

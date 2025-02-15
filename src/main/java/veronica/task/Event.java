@@ -13,12 +13,12 @@ public class Event extends Task {
         try {
             this.from = LocalDateTime.parse(from, Storage.INPUT_FORMAT);
             this.to = LocalDateTime.parse(to, Storage.INPUT_FORMAT);
-            this.dateAllowed = true;
+            this.isDateAllowed = true;
         } catch (DateTimeParseException e) {
             System.out.println("     Invalid date format! Please use 'd/M/yyyy HHmm'. Example: 16/12/1991 1800");
             this.from = null;
             this.to = null;
-            this.dateAllowed = false;
+            this.isDateAllowed = false;
         }
     }
 

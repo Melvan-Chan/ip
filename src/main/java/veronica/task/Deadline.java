@@ -11,9 +11,9 @@ public class Deadline extends Task {
         super(description, TaskType.DEADLINE);
         try {
             this.by = LocalDateTime.parse(by, Storage.INPUT_FORMAT);
-            this.dateAllowed = true;
+            this.isDateAllowed = true;
         } catch (DateTimeParseException e) {
-            this.dateAllowed = false;
+            this.isDateAllowed = false;
             System.out.println("     Invalid date format! Please use 'd/M/yyyy HHmm'. Example: 16/12/1991 1800");
             this.by = null;
         }
