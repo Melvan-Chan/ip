@@ -5,9 +5,14 @@ import veronica.ui.Ui;
 import veronica.main.Veronica;
 import veronica.main.VeronicaException;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 /**
  * Manages the list of tasks, including adding, removing, and marking tasks.
  */
+
 public class TaskManager {
     private Task[] tasks;
     private int taskCount;
@@ -143,6 +148,26 @@ public class TaskManager {
             }
         } else {
             throw new VeronicaException("UHOH! Invalid format detected. Use: event <task> /from <start> /to <end>");
+        }
+    }
+
+    public void findTasks(String input) throws VeronicaException {
+        String taskKeyword = input.substring(5).trim();
+        if (taskKeyword.isEmpty()) {
+            throw new VeronicaException("UHOH! Keyword description can't be empty.");
+        }
+
+        List<Task> matchingTasks = new ArrayList<Task>();
+        for (int i = 0; i < taskCount; i++) {
+            if(tasks[i].getDescription().toLowerCase().contains(taskKeyword.toLowerCase())) {
+                matchingTasks.add(tasks[i]);
+            }
+        }
+
+        if (matchingTasks.isEmpty()) {
+            Ui.showNoMatchingTask(taskKeyword);
+        } else {
+            Ui.showMatchingTask(matchingTasks, taskKeyword);
         }
     }
 

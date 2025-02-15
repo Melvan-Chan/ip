@@ -65,6 +65,9 @@ public class Parser {
             case "event" -> {
                 taskManager.addEvent(userInput);
             }
+            case "find" -> {
+                taskManager.findTasks(userInput);
+            }
             default -> {
                 throw new VeronicaException("UHOH! I'm sorry, but I've no idea what you mean! Please try again.");
             }
