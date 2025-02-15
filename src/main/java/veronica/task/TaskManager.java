@@ -151,6 +151,12 @@ public class TaskManager {
         }
     }
 
+    /**
+     * Finds and displays tasks containing the given keyword.
+     *
+     * @param input User input with the "find" command and keyword.
+     * @throws VeronicaException If the keyword is empty.
+     */
     public void findTasks(String input) throws VeronicaException {
         String taskKeyword = input.substring(5).trim();
         if (taskKeyword.isEmpty()) {
