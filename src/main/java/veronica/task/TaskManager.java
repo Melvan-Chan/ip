@@ -107,6 +107,7 @@ public class TaskManager {
             return ("UHOH! Description can't be empty.");
         }
         tasks[taskCount++] = new ToDo(taskDescription);
+        assert taskCount >= 0 : "Task count should never be negative";
         return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
     }
 
@@ -121,6 +122,8 @@ public class TaskManager {
         if (parts.length == 2 && (new Deadline(parts[0], parts[1])).isDateAllowed()) {
             Deadline currTask = new Deadline(parts[0], parts[1]);
             tasks[taskCount++] = currTask;
+            assert taskCount >= 0 : "Task count should never be negative";
+            
             return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
         } else {
             return "UHOH! Invalid format detected. Use: deadline <task> /by <date> <time>";
@@ -138,6 +141,7 @@ public class TaskManager {
         if (parts.length == 3 && (new Event(parts[0], parts[1], parts[2])).isDateAllowed()) {
             Event currTask = new Event(parts[0], parts[1], parts[2]);
             tasks[taskCount++] = currTask;
+            assert taskCount >= 0 : "Task count should never be negative";
             return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
         } else {
             return ("UHOH! Invalid format detected. Use: event <task> /from <start> /to <end>");
@@ -156,7 +160,7 @@ public class TaskManager {
             return ("UHOH! Keyword description can't be empty.");
         }
 
-        List<Task> matchingTasks = new ArrayList<Task>();
+        List<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < taskCount; i++) {
             if(tasks[i].getDescription().toLowerCase().contains(taskKeyword.toLowerCase())) {
                 matchingTasks.add(tasks[i]);
