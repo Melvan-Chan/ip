@@ -23,7 +23,7 @@ public class Ui {
                  - todo <task>: Adds task to the list.
                  - deadline <task> /by <date>: Adds deadline to the list with a due date.
                  - event <task> /from <date> /to <date>: Adds event to the list with a start/end date.'
-                    > Each date's format must be dd/MM/yyyy (Time) e.g 2/12/2019 1800
+                    > Each date's format must be <dd/MM/yyyy> <time> e.g 16/12/1991 1800
                  - list: List's all the tasks in the list.
                  - mark <no. of task>: Marks the task specified.
                  - unmark <no. of task>: Unmarks the task specified.
@@ -46,9 +46,10 @@ public class Ui {
      *
      * @param message The error message to be displayed.
      */
-    public static String showErrorMessage(String message) {
-        return ("UHOH! Error: " + message);
+    public static String showErrorMessage(String... messages) {
+        return "UHOH! Error: " + String.join(" ", messages);
     }
+
 
     /**
      * Displays the list of tasks.

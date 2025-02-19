@@ -123,7 +123,7 @@ public class TaskManager {
             tasks[taskCount++] = currTask;
             return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
         } else {
-            return "UHOH! Invalid format detected. Use: deadline <task> /by <date>";
+            return "UHOH! Invalid format detected. Use: deadline <task> /by <date> <time>";
         }
     }
 
