@@ -2,4 +2,4 @@
 [T] | [ ] | read book
 [D] | [ ] | submit assignment | [by: 2022-02-11T12:34]
 [E] | [ ] | school reopening | [from: 2023-02-11T23:59 | to: 2023-03-11T23:59]
-[T] | [X] | read book
+[T] | [ ] | read book
