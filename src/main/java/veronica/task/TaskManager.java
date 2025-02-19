@@ -6,7 +6,9 @@ import veronica.main.Veronica;
 import veronica.main.VeronicaException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -156,12 +158,12 @@ public class TaskManager {
             return ("UHOH! Keyword description can't be empty.");
         }
 
-        List<Task> matchingTasks = new ArrayList<Task>();
-        for (int i = 0; i < taskCount; i++) {
-            if(tasks[i].getDescription().toLowerCase().contains(taskKeyword.toLowerCase())) {
-                matchingTasks.add(tasks[i]);
-            }
-        }
+        // Filter out null tasks and process only non-null tasks
+        List<Task> matchingTasks = Arrays.stream(tasks)
+                .filter(task -> task != null && task.getDescription() != null
+                        && task.getDescription().toLowerCase().contains(taskKeyword.toLowerCase()))
+                .collect(Collectors.toList());
+
 
         if (matchingTasks.isEmpty()) {
             return Ui.showNoMatchingTask(taskKeyword);
