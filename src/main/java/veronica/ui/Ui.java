@@ -13,9 +13,9 @@ public class Ui {
     /**
      * Displays a greeting message with available commands.
      */
-    public static void showGreetMessage() {
-        String greet = """
-                _________________________________________________________________________________________________
+    public static String showGreetMessage() {
+        return """
+                ______________________________________________
                  Hello! I'm Veronica. Tony Stark create me after Jarvis.
                  A little bit about me is that my name means 'she who brings the victory'.
                 
@@ -30,16 +30,15 @@ public class Ui {
                  - remove <no. of task>: Removes the task specified.
                 
                  What can I do for you?
-                _________________________________________________________________________________________________
+                ______________________________________________
                 """;
-        System.out.println(greet);
     }
 
     /**
      * Displays a goodbye message when the user exits.
      */
-    public static void showGoodbyeMessage() {
-        System.out.println("Veronica: Bye. Hope to see you again soon!");
+    public static String showGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -47,62 +46,72 @@ public class Ui {
      *
      * @param message The error message to be displayed.
      */
-    public static void showErrorMessage(String message) {
-        System.out.println("    UHOH! Error: " + message);
+    public static String showErrorMessage(String message) {
+        return ("UHOH! Error: " + message);
     }
 
-        /**
-         * Displays the list of tasks.
-         *
-         * @param tasks The array of tasks.
-         * @param taskCount The number of tasks in the list.
-         */
-    public static void showList(Task[] tasks, int taskCount) {
-        System.out.println("     _________________________________________________________________________________________________");
+    /**
+     * Displays the list of tasks.
+     *
+     * @param tasks The array of tasks.
+     * @param taskCount The number of tasks in the list.
+     */
+    public static String showList(Task[] tasks, int taskCount) {
+        String output = "List of current tasks\n";
+        output += ("______________________________________________\n");
         if (taskCount == 0) {
-            System.out.println("     Veronica: List is empty at the moment.");
+            output += ("     List is empty at the moment.\n");
         } else {
+            StringBuilder listBuilder = new StringBuilder(output);
             for (int i = 0; i < taskCount; ++i) {
-                System.out.println("     " + (i + 1) + ". " + (tasks[i]));
+                listBuilder.append("     ").append(i + 1).append(". ").append(tasks[i]).append("\n");
             }
+            output = listBuilder.toString();
         }
-        System.out.println("     _________________________________________________________________________________________________");
+        output += ("______________________________________________");
+        return output;
     }
 
-        /**
-         * Displays a message when a task is added.
-         *
-         * @param task The task that was added.
-         * @param taskCount The total number of tasks after adding.
-         */
-    public static void showTaskAddedMessage(Task task, int taskCount) {
-        System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     Veronica: Alright, I've added this to the list.");
-        System.out.println("     " + task);
-        System.out.println("     Veronica: Now, you've got " + taskCount + " tasks in the list!");
-        System.out.println("     _________________________________________________________________________________________________");
+    /**
+     * Displays a message when a task is added.
+     *
+     * @param task The task that was added.
+     * @param taskCount The total number of tasks after adding.
+     */
+    public static String showTaskAddedMessage(Task task, int taskCount) {
+        String output = "\n";
+        output += ("______________________________________________\n");
+        output += ("     Alright, I've added this to the list.\n");
+        output += ("     " + task + "\n");
+        output += ("     Now, you've got " + taskCount + " tasks in the list!\n");
+        output += ("______________________________________________\n");
+        return output;
     }
 
-        /**
-         * Displays a message when a task is removed.
-         *
-         * @param task      The task that was removed.
-         * @param taskCount The total number of tasks remaining.
-         */
-    public static void showTaskRemovedMessage(Task task, int taskCount) {
-        System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     Veronica: Removed " + task);
-        System.out.println("     Veronica: Now, you've got " + taskCount + " tasks left.");
-        System.out.println("     _________________________________________________________________________________________________");
+    /**
+     * Displays a message when a task is removed.
+     *
+     * @param task      The task that was removed.
+     * @param taskCount The total number of tasks remaining.
+     */
+    public static String showTaskRemovedMessage(Task task, int taskCount) {
+        String output = "\n";
+        output += ("______________________________________________\n");
+        output += ("     Removed " + task + "\n");
+        output += ("     Now, you've got " + taskCount + " tasks left.\n");
+        output += ("______________________________________________\n");
+        return output;
     }
 
         /**
          * Displays a message when all tasks are removed.
          */
-    public static void showTaskRemovedAllMessage() {
-        System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     Veronica: Removed all the tasks in this list.");
-        System.out.println("     _________________________________________________________________________________________________");
+    public static String showTaskRemovedAllMessage() {
+        String output = "\n";
+        output += ("______________________________________________\n");
+        output += ("     Removed all the tasks in this list.\n");
+        output += ("______________________________________________\n");
+        return output;
     }
 
         /**
@@ -110,11 +119,13 @@ public class Ui {
          *
          * @param task The task that was marked as completed.
          */
-    public static void showTaskMarkedMessage(Task task) {
-        System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     Veronica: Great job! Marking this task as completed!");
-        System.out.println("     " + task);
-        System.out.println("     _________________________________________________________________________________________________");
+    public static String showTaskMarkedMessage(Task task) {
+        String output = "\n";
+        output += ("______________________________________________\n");
+        output += ("     Great job! Marking this task as completed!\n");
+        output += ("     " + task + "\n");
+        output += ("______________________________________________\n");
+        return output;
     }
 
         /**
@@ -122,25 +133,31 @@ public class Ui {
          *
          * @param task The task that was unmarked.
          */
-    public static void showTaskUnmarkedMessage(Task task) {
-        System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     Veronica: Alright! Marking this task as uncompleted!");
-        System.out.println("     " + task);
-        System.out.println("     _________________________________________________________________________________________________");
+    public static String showTaskUnmarkedMessage(Task task) {
+        String output = "\n";
+        output += ("______________________________________________\n");
+        output += ("     Alright! Marking this task as uncompleted!\n");
+        output += ("     " + task + "\n");
+        output += ("______________________________________________\n");
+        return output;
     }
 
-    public static void showNoMatchingTask(String message) {
-        System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     Veronica: No such task found with the given keyword: '" + message + "'");
-        System.out.println("     _________________________________________________________________________________________________");
+    public static String showNoMatchingTask(String message) {
+        String output = "\n";
+        output += ("______________________________________________\n");
+        output += ("     No such task found with the given keyword: '" + message + "'\n");
+        output += ("______________________________________________\n");
+        return output;
     }
 
-    public static void showMatchingTask(List<Task> matchingTasks, String message) {
-        System.out.println("     _________________________________________________________________________________________________");
-        System.out.println("     Veronica: Showing all task with the keyword: '" + message + "'");
+    public static String showMatchingTask(List<Task> matchingTasks, String message) {
+        StringBuilder output = new StringBuilder("\n");
+        output.append("______________________________________________\n");
+        output.append("     Showing all task with the keyword: '").append(message).append("'\n");
         for (int i = 0; i < matchingTasks.size(); i++) {
-            System.out.println("     " + (i + 1) + ". " + matchingTasks.get(i));
+            output.append("     ").append(i + 1).append(". ").append(matchingTasks.get(i)).append("\n");
         }
-        System.out.println("     _________________________________________________________________________________________________");
+        output.append("______________________________________________\n");
+        return output.toString();
     }
 }

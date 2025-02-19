@@ -29,23 +29,22 @@ public class TaskManager {
     /**
      * Lists all tasks currently in the task manager.
      */
-    public void listTasks() {
-        Ui.showList(tasks, taskCount);
+    public String listTasks() {
+        return Ui.showList(tasks, taskCount);
     }
 
     /**
      * Marks a task as completed.
      *
      * @param input The user input containing the task number.
-     * @throws VeronicaException If the task number is invalid.
      */
-    public void markTask(String input) throws VeronicaException {
+    public String markTask(String input) throws VeronicaException {
         int taskIndex = Integer.parseInt(input.substring(5)) - 1;
         if (taskIndex >= 0 && taskIndex < taskCount) {
             tasks[taskIndex].markAsComplete();
-            Ui.showTaskMarkedMessage(tasks[taskIndex]);
+            return Ui.showTaskMarkedMessage(tasks[taskIndex]);
         } else {
-            throw new VeronicaException("UHOH! Task number does not exist.");
+            return ("UHOH! Task number does not exist.");
         }
     }
 
@@ -55,13 +54,13 @@ public class TaskManager {
      * @param input The user input containing the task number.
      * @throws VeronicaException If the task number is invalid.
      */
-    public void unmarkTask(String input) throws VeronicaException {
+    public String unmarkTask(String input) throws VeronicaException {
         int taskIndex = Integer.parseInt(input.substring(7)) - 1;
         if (taskIndex >= 0 && taskIndex < taskCount) {
             tasks[taskIndex].markAsIncomplete();
-            Ui.showTaskUnmarkedMessage(tasks[taskIndex]);
+            return Ui.showTaskUnmarkedMessage(tasks[taskIndex]);
         } else {
-            throw new VeronicaException("UHOH! Task number does not exist.");
+            return ("UHOH! Task number does not exist.");
         }
     }
 
@@ -71,12 +70,12 @@ public class TaskManager {
      * @param input The user input specifying which task to remove.
      * @throws VeronicaException If the task number is invalid.
      */
-    public void removeTask(String input) throws VeronicaException {
+    public String removeTask(String input) throws VeronicaException {
         String argument = input.substring(7).trim();
         if (argument.equalsIgnoreCase("all")) {
             taskCount = 0;
             tasks = new Task[Veronica.MAX_TASK_SIZE];
-            Ui.showTaskRemovedAllMessage();
+            return Ui.showTaskRemovedAllMessage();
         } else {
             int taskIndex = Integer.parseInt(argument) - 1;
             if (taskIndex >= 0 && taskIndex < taskCount) {
@@ -89,9 +88,9 @@ public class TaskManager {
                 tasks[taskCount - 1] = null; // Clear last reference
                 taskCount--;
 
-                Ui.showTaskRemovedMessage(removedTask, taskCount);
+                return Ui.showTaskRemovedMessage(removedTask, taskCount);
             } else {
-                throw new VeronicaException("UHOH! Task number does not exist.");
+                return ("UHOH! Task number does not exist.");
             }
         }
     }
@@ -102,13 +101,13 @@ public class TaskManager {
      * @param input The user input containing the task description.
      * @throws VeronicaException If the description is empty.
      */
-    public void addTodo(String input) throws VeronicaException {
+    public String addTodo(String input) throws VeronicaException {
         String taskDescription = input.substring(5).trim();
         if (taskDescription.isEmpty()) {
-            throw new VeronicaException("UHOH! Description can't be empty.");
+            return ("UHOH! Description can't be empty.");
         }
         tasks[taskCount++] = new ToDo(taskDescription);
-        Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
+        return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
     }
 
     /**
@@ -117,17 +116,14 @@ public class TaskManager {
      * @param input The user input containing the task description and due date.
      * @throws VeronicaException If the format is incorrect or missing required details.
      */
-    public void addDeadline(String input) throws VeronicaException {
+    public String addDeadline(String input) throws VeronicaException {
         String[] parts = input.substring(9).split(" /by ");
-        if (parts.length == 2) {
+        if (parts.length == 2 && (new Deadline(parts[0], parts[1])).isDateAllowed()) {
             Deadline currTask = new Deadline(parts[0], parts[1]);
-
-            if (currTask.isDateAllowed()) {
-                tasks[taskCount++] = currTask;
-                Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
-            }
+            tasks[taskCount++] = currTask;
+            return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
         } else {
-            throw new VeronicaException("UHOH! Invalid format detected. Use: deadline <task> /by <date>");
+            return "UHOH! Invalid format detected. Use: deadline <task> /by <date>";
         }
     }
 
@@ -137,17 +133,14 @@ public class TaskManager {
      * @param input The user input containing the event description, start date, and end date.
      * @throws VeronicaException If the format is incorrect or missing required details.
      */
-    public void addEvent(String input) throws VeronicaException {
+    public String addEvent(String input) throws VeronicaException {
         String[] parts = input.substring(6).split(" /from | /to ");
-        if (parts.length == 3) {
+        if (parts.length == 3 && (new Event(parts[0], parts[1], parts[2])).isDateAllowed()) {
             Event currTask = new Event(parts[0], parts[1], parts[2]);
-
-            if (currTask.isDateAllowed()) {
-                tasks[taskCount++] = currTask;
-                Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
-            }
+            tasks[taskCount++] = currTask;
+            return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
         } else {
-            throw new VeronicaException("UHOH! Invalid format detected. Use: event <task> /from <start> /to <end>");
+            return ("UHOH! Invalid format detected. Use: event <task> /from <start> /to <end>");
         }
     }
 
@@ -157,10 +150,10 @@ public class TaskManager {
      * @param input User input with the "find" command and keyword.
      * @throws VeronicaException If the keyword is empty.
      */
-    public void findTasks(String input) throws VeronicaException {
+    public String findTasks(String input) throws VeronicaException {
         String taskKeyword = input.substring(5).trim();
         if (taskKeyword.isEmpty()) {
-            throw new VeronicaException("UHOH! Keyword description can't be empty.");
+            return ("UHOH! Keyword description can't be empty.");
         }
 
         List<Task> matchingTasks = new ArrayList<Task>();
@@ -171,16 +164,17 @@ public class TaskManager {
         }
 
         if (matchingTasks.isEmpty()) {
-            Ui.showNoMatchingTask(taskKeyword);
+            return Ui.showNoMatchingTask(taskKeyword);
         } else {
-            Ui.showMatchingTask(matchingTasks, taskKeyword);
+            return Ui.showMatchingTask(matchingTasks, taskKeyword);
         }
     }
 
     /**
      * Saves the current tasks to storage and exits the program.
      */
-    public void exitProgram() {
+    public String exitProgram() {
         storage.saveTasks(tasks, taskCount);
+        return Ui.showGoodbyeMessage();
     }
 }

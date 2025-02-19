@@ -11,7 +11,7 @@ public class Veronica {
     private static final Parser parser = new Parser();
 
     public static void main(String[] args) {
-        Ui.showGreetMessage();
+        //Ui.showGreetMessage();
 
         Scanner sc = new Scanner(System.in);            // Set up to read user input
         while (sc.hasNextLine()) {
@@ -26,7 +26,11 @@ public class Veronica {
     /**
      * Generates a response for the user's chat message.
      */
-    public String getResponse(String input) {
-        return "Veronica: " + input;
+    public static String getResponse(String input) {
+//        parser.processUserCommands(input);
+//        if (!parser.getIsActive()) {
+//            break;
+//        }
+        return "Veronica: " + parser.processUserCommands(input);
     }
 }

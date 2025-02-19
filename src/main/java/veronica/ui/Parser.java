@@ -32,7 +32,7 @@ public class Parser {
      *
      * @param userInput The command entered by the user.
      */
-    public void processUserCommands(String userInput) {
+    public String processUserCommands(String userInput) {
         try {
 
             String[] parts = userInput.split(" ",2);
@@ -40,40 +40,39 @@ public class Parser {
 
             switch (command) {
             case "bye" -> {
-                Ui.showGoodbyeMessage();
                 this.isActive = false;
-                taskManager.exitProgram();
+                return taskManager.exitProgram();
             }
             case "list" -> {
-                taskManager.listTasks();
+                return taskManager.listTasks();
             }
             case "mark" -> {
-                taskManager.markTask(userInput);
+                return taskManager.markTask(userInput);
             }
             case "unmark" -> {
-                taskManager.unmarkTask(userInput);
+                return taskManager.unmarkTask(userInput);
             }
             case "remove" -> {
-                taskManager.removeTask(userInput);
+                return taskManager.removeTask(userInput);
             }
             case "todo" -> {
-                taskManager.addTodo(userInput);
+                return taskManager.addTodo(userInput);
             }
             case "deadline" -> {
-                taskManager.addDeadline(userInput);
+                return taskManager.addDeadline(userInput);
             }
             case "event" -> {
-                taskManager.addEvent(userInput);
+                return taskManager.addEvent(userInput);
             }
             case "find" -> {
-                taskManager.findTasks(userInput);
+                return taskManager.findTasks(userInput);
             }
             default -> {
-                throw new VeronicaException("UHOH! I'm sorry, but I've no idea what you mean! Please try again.");
+                return ("UHOH! I'm sorry, but I've no idea what you mean! Please try again.");
             }
             }
         } catch (VeronicaException e) {
-            Ui.showErrorMessage(e.getMessage());
+            return Ui.showErrorMessage(e.getMessage());
         }
     }
 }
