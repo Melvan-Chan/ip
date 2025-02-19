@@ -44,7 +44,7 @@ public class TaskManager {
             tasks[taskIndex].markAsComplete();
             return Ui.showTaskMarkedMessage(tasks[taskIndex]);
         } else {
-            return ("UHOH! Task number does not exist.");
+            return Ui.showErrorMessage("Task number does not exist.");
         }
     }
 
@@ -60,7 +60,7 @@ public class TaskManager {
             tasks[taskIndex].markAsIncomplete();
             return Ui.showTaskUnmarkedMessage(tasks[taskIndex]);
         } else {
-            return ("UHOH! Task number does not exist.");
+            return Ui.showErrorMessage("Task number does not exist.");
         }
     }
 
@@ -90,7 +90,7 @@ public class TaskManager {
 
                 return Ui.showTaskRemovedMessage(removedTask, taskCount);
             } else {
-                return ("UHOH! Task number does not exist.");
+                return Ui.showErrorMessage("Task number does not exist.");
             }
         }
     }
@@ -104,7 +104,7 @@ public class TaskManager {
     public String addTodo(String input) throws VeronicaException {
         String taskDescription = input.substring(5).trim();
         if (taskDescription.isEmpty()) {
-            return ("UHOH! Description can't be empty.");
+            return Ui.showErrorMessage("Description can't be empty.");
         }
         tasks[taskCount++] = new ToDo(taskDescription);
         return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
@@ -123,7 +123,7 @@ public class TaskManager {
             tasks[taskCount++] = currTask;
             return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
         } else {
-            return "UHOH! Invalid format detected. Use: deadline <task> /by <date> <time>";
+            return Ui.showErrorMessage("Invalid format detected. Use: deadline <task> /by <date> <time>");
         }
     }
 
@@ -140,7 +140,7 @@ public class TaskManager {
             tasks[taskCount++] = currTask;
             return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
         } else {
-            return ("UHOH! Invalid format detected. Use: event <task> /from <start> /to <end>");
+            return Ui.showErrorMessage("Invalid format detected. Use: event <task> /from <start> /to <end>");
         }
     }
 
@@ -153,7 +153,7 @@ public class TaskManager {
     public String findTasks(String input) throws VeronicaException {
         String taskKeyword = input.substring(5).trim();
         if (taskKeyword.isEmpty()) {
-            return ("UHOH! Keyword description can't be empty.");
+            return Ui.showErrorMessage("Keyword description can't be empty.");
         }
 
         List<Task> matchingTasks = new ArrayList<Task>();
