@@ -5,7 +5,6 @@ import veronica.ui.Ui;
 import veronica.main.Veronica;
 import veronica.main.VeronicaException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +20,13 @@ public class TaskManager {
     private static final Storage storage = new Storage(Veronica.FILE_PATH);
 
     /**
+     * Sort tasks by TaskType and date.
+     */
+    public void sortTasks() {
+        Arrays.sort(tasks, 0, taskCount); // Uses compareTo from Task class
+    }
+
+    /**
      * Constructs a TaskManager and loads tasks from storage.
      */
     public TaskManager() {
@@ -32,6 +38,7 @@ public class TaskManager {
      * Lists all tasks currently in the task manager.
      */
     public String listTasks() {
+        sortTasks(); // Sort tasks before displaying
         return Ui.showList(tasks, taskCount);
     }
 

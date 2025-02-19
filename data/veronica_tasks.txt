@@ -1,5 +1,10 @@
-[D] | [ ] | return book | [by: 2019-12-02T18:00]
 [T] | [ ] | read book
+[D] | [ ] | test 3 | [by: 2022-02-01T18:00]
+[D] | [ ] | return book | [by: 2019-12-02T18:00]
+[D] | [ ] | find book | [by: 2020-02-02T18:00]
+[T] | [ ] | find book
+[D] | [ ] | test 1 | [by: 2022-02-04T18:00]
 [D] | [ ] | submit assignment | [by: 2022-02-11T12:34]
-[E] | [ ] | school reopening | [from: 2023-02-11T23:59 | to: 2023-03-11T23:59]
+[D] | [ ] | test 2 | [by: 2022-02-05T18:00]
 [T] | [X] | read book
+[E] | [ ] | school reopening | [from: 2023-02-11T23:59 | to: 2023-03-11T23:59]

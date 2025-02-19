@@ -1,10 +1,9 @@
 package veronica.task;
 
 import veronica.misc.Storage;
-
 import java.time.LocalDateTime;
 
-public abstract class Task {
+public abstract class Task implements Comparable<Task>{
     protected String description;
     protected boolean isDone;
     protected TaskType type;
@@ -15,6 +14,21 @@ public abstract class Task {
         this.isDone = false;
         this.type = type;
         this.isDateAllowed = false;
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        // Prioritize by task type: ToDo > Deadline > Event
+        if (this instanceof ToDo && !(other instanceof ToDo)) {
+            return -1; // ToDo comes first
+        } else if (this instanceof Deadline && !(other instanceof Deadline) && !(other instanceof ToDo)) {
+            return -1; // Deadline comes before Event
+        } else if (this instanceof Event && !(other instanceof Event)) {
+            return 1; // Event comes last
+        }
+
+        // If both tasks are of the same type, use the default comparison
+        return 0;
     }
 
     public String getStatus() {
