@@ -43,8 +43,8 @@ public class Ui {
 
     /**
      * Displays an error message.
-     *
-     * @param message The error message to be displayed.
+     * <p>
+     * The error message to be displayed.
      */
     public static String showErrorMessage(String... messages) {
         return "UHOH! Error: " + String.join(" ", messages);

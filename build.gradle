@@ -49,8 +49,9 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "veronica"
     archiveClassifier = null
+    archiveFileName = 'veronica.jar'
 }
 
 run{
