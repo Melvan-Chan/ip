@@ -21,6 +21,25 @@ public class Event extends Task {
             this.isDateAllowed = false;
         }
     }
+    public LocalDateTime getStartTime() {
+        return this.from;
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        // First, ensure correct ordering of types (ToDo > Deadline > Event)
+        int typeComparison = super.compareTo(other);
+        if (typeComparison != 0) {
+            return typeComparison;
+        }
+
+        // If both are Events, compare by startTime
+        if (other instanceof Event) {
+            Event otherEvent = (Event) other;
+            return this.getStartTime().compareTo(otherEvent.getStartTime());
+        }
+        return 0;
+    }
 
     @Override
     public String toString() {

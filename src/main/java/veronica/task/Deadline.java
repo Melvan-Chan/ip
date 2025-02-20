@@ -24,6 +24,22 @@ public class Deadline extends Task {
     }
 
     @Override
+    public int compareTo(Task other) {
+        // First, ensure correct ordering of types (ToDo > Deadline > Event)
+        int typeComparison = super.compareTo(other);
+        if (typeComparison != 0) {
+            return typeComparison;
+        }
+
+        // If both are Deadlines, compare by dueDate
+        if (other instanceof Deadline) {
+            Deadline otherDeadline = (Deadline) other;
+            return this.getDeadline().compareTo(otherDeadline.getDeadline());
+        }
+        return 0;
+    }
+
+    @Override
     public String toString() {
         String formattedDate = (by != null) ? formatDateWithSuffix(by) : "Invalid date";
         return super.toString() + " | [by: " + formattedDate + "]";

@@ -5,8 +5,9 @@ import veronica.ui.Ui;
 import veronica.main.Veronica;
 import veronica.main.VeronicaException;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -17,6 +18,13 @@ public class TaskManager {
     private Task[] tasks;
     private int taskCount;
     private static final Storage storage = new Storage(Veronica.FILE_PATH);
+
+    /**
+     * Sort tasks by TaskType and date.
+     */
+    public void sortTasks() {
+        Arrays.sort(tasks, 0, taskCount); // Uses compareTo from Task class
+    }
 
     /**
      * Constructs a TaskManager and loads tasks from storage.
@@ -30,6 +38,7 @@ public class TaskManager {
      * Lists all tasks currently in the task manager.
      */
     public String listTasks() {
+        sortTasks(); // Sort tasks before displaying
         return Ui.showList(tasks, taskCount);
     }
 
@@ -123,7 +132,7 @@ public class TaskManager {
             Deadline currTask = new Deadline(parts[0], parts[1]);
             tasks[taskCount++] = currTask;
             assert taskCount >= 0 : "Task count should never be negative";
-            
+
             return Ui.showTaskAddedMessage(tasks[taskCount - 1], taskCount);
         } else {
             return Ui.showErrorMessage("Invalid format detected. Use: deadline <task> /by <date> <time>");
@@ -160,12 +169,12 @@ public class TaskManager {
             return Ui.showErrorMessage("Keyword description can't be empty.");
         }
 
-        List<Task> matchingTasks = new ArrayList<>();
-        for (int i = 0; i < taskCount; i++) {
-            if(tasks[i].getDescription().toLowerCase().contains(taskKeyword.toLowerCase())) {
-                matchingTasks.add(tasks[i]);
-            }
-        }
+        // Filter out null tasks and process only non-null tasks
+        List<Task> matchingTasks = Arrays.stream(tasks)
+                .filter(task -> task != null && task.getDescription() != null
+                        && task.getDescription().toLowerCase().contains(taskKeyword.toLowerCase()))
+                .collect(Collectors.toList());
+
 
         if (matchingTasks.isEmpty()) {
             return Ui.showNoMatchingTask(taskKeyword);
