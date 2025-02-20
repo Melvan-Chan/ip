@@ -50,9 +50,7 @@ public abstract class Task implements Comparable<Task>{
     }
 
     public static String formatDateWithSuffix(LocalDateTime dateTime) {
-        int day = dateTime.getDayOfMonth();
-        String suffix = getDaySuffix(day);
-        return day + suffix + " of " + dateTime.format(Storage.OUTPUT_FORMAT);
+        return dateTime.format(Storage.OUTPUT_FORMAT);
     }
 
     public static String getDaySuffix(int day) {

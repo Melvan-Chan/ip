@@ -99,7 +99,7 @@ public class Ui {
         String output = "\n";
         output += ("______________________________________________\n");
         output += ("     Removed " + task + "\n");
-        output += ("     Now, you've got " + taskCount + " tasks left.\n");
+        output += ("     Now, you've got " + taskCount + " tasks in the list.\n");
         output += ("______________________________________________\n");
         return output;
     }
