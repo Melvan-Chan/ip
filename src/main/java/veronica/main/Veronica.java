@@ -11,6 +11,14 @@ public class Veronica {
 
     public static void main(String[] args) {
 
+//        Scanner sc = new Scanner(System.in);            // Set up to read user input
+//        while (sc.hasNextLine()) {
+//            parser.processUserCommands(sc.nextLine());  // Read user input
+//            if (!parser.getIsActive()) {
+//                break;
+//            }
+//        }
+//        sc.close();
     }
 
     /**
