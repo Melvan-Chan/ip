@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
@@ -16,6 +17,7 @@ dependencies {
 
     implementation 'org.openjfx:javafx-controls:17'
     implementation 'org.openjfx:javafx-fxml:17'
+
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'

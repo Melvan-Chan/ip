@@ -56,13 +56,25 @@ public class Parser {
                 return taskManager.removeTask(userInput);
             }
             case "todo" -> {
-                return taskManager.addTodo(userInput);
+                if (parts.length > 1) {
+                    return taskManager.addTodo(userInput);
+                } else {
+                    return ("UHOH! I'm sorry, but I've no idea what you mean! Please try again.");
+                }
             }
             case "deadline" -> {
-                return taskManager.addDeadline(userInput);
+                if (parts.length > 1) {
+                    return taskManager.addDeadline(userInput);
+                } else {
+                    return ("UHOH! I'm sorry, but I've no idea what you mean! Please try again.");
+                }
             }
             case "event" -> {
-                return taskManager.addEvent(userInput);
+                if (parts.length > 1) {
+                    return taskManager.addEvent(userInput);
+                } else {
+                    return ("UHOH! I'm sorry, but I've no idea what you mean! Please try again.");
+                }
             }
             case "find" -> {
                 return taskManager.findTasks(userInput);
